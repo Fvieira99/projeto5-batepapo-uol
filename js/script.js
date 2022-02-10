@@ -1,7 +1,54 @@
 let info;
+let nomeUsuario;
+const main = document.querySelector("main");
 pedirInfo();
+entrarNaSala();
 setInterval(pedirInfo, 3000);
+setInterval(reenviarDadosUsuario, 5000);
 
+function entrarNaSala() {
+	nomeUsuario = prompt("Qual é o seu apelido?");
+	const dadosUsuario = {
+		name: nomeUsuario,
+	};
+	const requisição = axios.post(
+		"https://mock-api.driven.com.br/api/v4/uol/participants",
+		dadosUsuario
+	);
+
+	requisição.then(validarUsuario);
+	requisição.catch(erroValidarUsuario);
+}
+
+function validarUsuario(resposta) {
+	console.log(resposta);
+}
+
+function erroValidarUsuario(erro) {
+	console.log(erro.response);
+	alert("Apelido já existente\nDigite outro apelido");
+	nomeUsuario = prompt("Qual é o seu apelido?");
+	const dadosUsuario = {
+		name: nomeUsuario,
+	};
+	const requisição = axios.post(
+		"https://mock-api.driven.com.br/api/v4/uol/participants",
+		dadosUsuario
+	);
+
+	requisição.then(validarUsuario);
+	requisição.catch(erroValidarUsuario);
+}
+
+function reenviarDadosUsuario() {
+	const statusUsuario = {
+		name: nomeUsuario,
+	};
+	const requisição = axios.post(
+		"https://mock-api.driven.com.br/api/v4/uol/status",
+		statusUsuario
+	);
+}
 function pedirInfo() {
 	const promise = axios.get(
 		"https://mock-api.driven.com.br/api/v4/uol/messages"
@@ -12,7 +59,6 @@ function pedirInfo() {
 
 function pegarInfo(informacao) {
 	info = informacao.data;
-	console.log(info);
 	mostrarMensagens();
 }
 
