@@ -11,13 +11,13 @@ function entrarNaSala() {
 	const dadosUsuario = {
 		name: nomeUsuario,
 	};
-	const requisição = axios.post(
+	const requisicao = axios.post(
 		"https://mock-api.driven.com.br/api/v4/uol/participants",
 		dadosUsuario
 	);
 
-	requisição.then(validarUsuario);
-	requisição.catch(erroValidarUsuario);
+	requisicao.then(validarUsuario);
+	requisicao.catch(erroValidarUsuario);
 }
 
 function validarUsuario(resposta) {
@@ -31,24 +31,50 @@ function erroValidarUsuario(erro) {
 	const dadosUsuario = {
 		name: nomeUsuario,
 	};
-	const requisição = axios.post(
+	const requisicao = axios.post(
 		"https://mock-api.driven.com.br/api/v4/uol/participants",
 		dadosUsuario
 	);
 
-	requisição.then(validarUsuario);
-	requisição.catch(erroValidarUsuario);
+	requisicao.then(validarUsuario);
+	requisicao.catch(erroValidarUsuario);
 }
 
 function reenviarDadosUsuario() {
 	const statusUsuario = {
 		name: nomeUsuario,
 	};
-	const requisição = axios.post(
+	const requisicao = axios.post(
 		"https://mock-api.driven.com.br/api/v4/uol/status",
 		statusUsuario
 	);
 }
+
+function enviarMensagem() {
+	const input = document.querySelector("input").value;
+	console.log(input);
+	if (input === "") {
+		alert("Digite uma mensagem válida");
+	} else {
+		const InfoMensagemEnviada = {
+			from: nomeUsuario,
+			to: "Todos",
+			text: input,
+			type: "message",
+		};
+		const requisicao = axios.post(
+			"https://mock-api.driven.com.br/api/v4/uol/messages",
+			InfoMensagemEnviada
+		);
+		requisicao.then(pedirInfo);
+		requisicao.catch(recarregarPagina);
+	}
+}
+
+function recarregarPagina() {
+	window.location.reload();
+}
+
 function pedirInfo() {
 	const promise = axios.get(
 		"https://mock-api.driven.com.br/api/v4/uol/messages"
