@@ -39,7 +39,6 @@ function validarUsuario(resposta) {
 }
 
 function erroValidarUsuario(erro) {
-	// console.log(erro.response.data);
 	alert("Apelido inválido ou já existente\nDigite outro apelido");
 	window.location.reload();
 }
@@ -62,30 +61,33 @@ function mostrarMensagens() {
 	for (let i = 0; i < info.length; i++) {
 		if (info[i].type === "status") {
 			main.innerHTML += ` 
-	<div class="container-mensagem status_msg">
-		<div class="mensagem">
-			<small>(${info[i].time})</small><span>${info[i].from}</span> ${info[i].text}
+		<div class="container-mensagem status_msg" data-identifier="message">
+			<div class="mensagem">
+				<small>(${info[i].time})</small><span>${info[i].from}</span> ${info[i].text}
+			</div>
 		</div>
-	</div>
 	
-	`;
+		`;
 		} else if (info[i].type === "message") {
 			main.innerHTML += ` 
-	<div class="container-mensagem ">
-		<div class="mensagem">
-			<small>(${info[i].time})</small><span>${info[i].from}</span> para <span>${info[i].to}:</span> ${info[i].text}
+		<div class="container-mensagem" data-identifier="message">
+			<div class="mensagem">
+				<small>(${info[i].time})</small><span>${info[i].from}</span> para <span>${info[i].to}:</span> ${info[i].text}
+			</div>
 		</div>
-	</div>
 	
-	`;
-		} else if (info[i] === "private_message") {
+		`;
+		} else if (
+			info[i].type === "private_message" &&
+			info[i].to === nomeUsuario
+		) {
 			main.innerHTML += ` 
-	<div class="container-mensagem private_msg">
-		<div class="mensagem">
-			<small>(${info[i].time})</small><span>${info[i].from}</span> reservadamente para <span>${info[i].to}:</span> ${info[i].text}
+		<div class="container-mensagem private_msg" data-identifier="message">
+			<div class="mensagem">
+				<small>(${info[i].time})</small><span>${info[i].from}</span> reservadamente para <span>${info[i].to}:</span> ${info[i].text}
+			</div>
 		</div>
-	</div>
-	`;
+		`;
 		}
 	}
 	mostrarUltimaMensagem();
