@@ -18,6 +18,12 @@
 	</head>
 
 	<body>
+		<div class="container-login">
+			<img src="./assets/logo_Uol.svg" alt="Logo Uol" />
+			<input class="input-login" placeholder="Digite seu nome" type="text" />
+			<button class="botao-login" onclick="entrarNaSala()">Entrar</button>
+		</div>
+
 		<header>
 			<div class="container-header">
 				<img src="./assets/logo_Uol.svg" alt="Logo Bate-Papo Uol" />
@@ -29,7 +35,11 @@
 
 		<div class="container-input">
 			<div>
-				<input placeholder="Escreva aqui..." type="text" />
+				<input
+					class="input-mensagem"
+					placeholder="Escreva aqui..."
+					type="text"
+				/>
 				<ion-icon
 					onclick="enviarMensagem()"
 					name="paper-plane-outline"
