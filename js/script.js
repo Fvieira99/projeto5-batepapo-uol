@@ -11,7 +11,6 @@ document.querySelector(".input-login").onkeydown = function (e) {
 
 function entrarNaSala() {
 	nomeUsuario = document.querySelector(".input-login").value;
-	console.log(nomeUsuario);
 	const dadosUsuario = {
 		name: nomeUsuario,
 	};
@@ -116,7 +115,6 @@ document.querySelector(".input-mensagem").onkeydown = function (e) {
 
 function enviarMensagem() {
 	let input = document.querySelector("input").value;
-	console.log(input);
 	if (input === "") {
 		alert("Digite uma mensagem válida");
 	} else {
